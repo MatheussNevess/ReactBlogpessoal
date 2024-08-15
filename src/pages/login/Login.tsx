@@ -1,11 +1,10 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import './Login.css';
-
 import { Link, useNavigate } from 'react-router-dom';
-
 import { AuthContext } from '../../contexts/AuthContext';
 import UsuarioLogin from '../../models/UsuarioLogin';
 import { RotatingLines } from 'react-loader-spinner';
+import { toastAlerta } from '../../util/toastAlerta';
 
 function Login() {
   let navigate = useNavigate();
@@ -14,43 +13,42 @@ function Login() {
     {} as UsuarioLogin
   );
 
-  const { usuario, handleLogin } = useContext(AuthContext);
-
-  const {isLoading} = useContext(AuthContext) 
+  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
 
   useEffect(() => {
-    if (usuario.token !== "") {
-        navigate('/home')
+    if (usuario.token !== '') {
+      toastAlerta('Login realizado com sucesso!', 'sucesso');
+      navigate('/home');
     }
-}, [usuario])
+  }, [usuario.token, navigate]);
 
-function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-  setUsuarioLogin({
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+    setUsuarioLogin({
       ...usuarioLogin,
-      [e.target.name]: e.target.value
-  })
-}
+      [e.target.name]: e.target.value,
+    });
+  }
 
-function login(e: ChangeEvent<HTMLFormElement>) {
-  e.preventDefault()
-  handleLogin(usuarioLogin)
-}
+  function login(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    handleLogin(usuarioLogin);
+  }
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
         <form className="flex justify-center items-center flex-col w-1/2 gap-4" onSubmit={login}>
-          <h2 className="text-slate-900 text-5xl ">Entrar</h2>
+          <h2 className="text-slate-900 text-5xl">Entrar</h2>
           <div className="flex flex-col w-full">
             <label htmlFor="usuario">Usuário</label>
             <input
               type="text"
               id="usuario"
               name="usuario"
-              placeholder="Usuario"
+              placeholder="Usuário"
               className="border-2 border-slate-700 rounded p-2"
-              value={usuarioLogin.usuario} 
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              value={usuarioLogin.usuario}
+              onChange={atualizarEstado}
             />
           </div>
           <div className="flex flex-col w-full">
@@ -61,19 +59,19 @@ function login(e: ChangeEvent<HTMLFormElement>) {
               name="senha"
               placeholder="Senha"
               className="border-2 border-slate-700 rounded p-2"
-              value={usuarioLogin.senha} 
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              value={usuarioLogin.senha}
+              onChange={atualizarEstado}
             />
           </div>
-          <button  type='submit' className="rounded bg-indigo-400 hover:bg-indigo-900 text-white w-1/2 py-2 flex justify-center">
-           {isLoading ? <RotatingLines
-            strokeColor="white"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="24"
-            visible={true}
-          /> :
-            <span>Entrar</span>}
+          <button type='submit' className="rounded bg-indigo-400 hover:bg-indigo-900 text-white w-1/2 py-2 flex justify-center">
+            {isLoading ? <RotatingLines
+              strokeColor="white"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="24"
+              visible={true}
+            /> :
+              <span>Entrar</span>}
           </button>
 
           <hr className="border-slate-800 w-full" />

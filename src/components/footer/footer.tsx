@@ -18,9 +18,15 @@ function Footer() {
             <p className='text-xl font-bold'>Blog pessoal Generation | Copyright: {data}</p>
             <p className='text-lg'>Acesse nossas redes sociais</p>
             <div className='flex gap-2'>
-              <LinkedinLogo size={48} weight='bold' />
-              <InstagramLogo size={48} weight='bold' />
-              <FacebookLogo size={48} weight='bold' />
+            <a href="https://www.linkedin.com/school/generationbrasil/" target="_blank" rel="noopener noreferrer">
+                <LinkedinLogo size={48} weight='bold' />
+              </a>
+              <a href="https://www.instagram.com/generationbrasil/" target="_blank" rel="noopener noreferrer">
+                <InstagramLogo size={48} weight='bold' />
+              </a>
+              <a href="https://www.facebook.com/generationbrasil" target="_blank" rel="noopener noreferrer">
+                <FacebookLogo size={48} weight='bold' />
+              </a>
             </div>
           </div>
         </div>
