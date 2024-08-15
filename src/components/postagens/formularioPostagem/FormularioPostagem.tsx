@@ -147,7 +147,7 @@ function FormularioPostagem() {
             value={postagem.titulo}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             type="text"
-            placeholder="Titulo"
+            placeholder="Titulo (Mínimo 5 caracteres)"
             name="titulo"
             required
             className="border-2 border-slate-700 rounded p-2"
@@ -159,7 +159,7 @@ function FormularioPostagem() {
             value={postagem.texto}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             type="text"
-            placeholder="Texto"
+            placeholder="Texto (Mínimo 10 caracteres)"
             name="texto"
             required
             className="border-2 border-slate-700 rounded p-2"
